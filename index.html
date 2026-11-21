@@ -1,444 +1,349 @@
 <!DOCTYPE html>
-<html lang="km">
+<html lang="km" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ភ្ជាប់សេវា VPN - ប្រព័ន្ធគ្រប់គ្រងទំនើប</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Kantumruy Pro & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Kantumruy Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Kantumruy Pro', 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .glass-panel {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-        .animate-pulse-ring {
-            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP V2Box Portal — Monochrome</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .bg-grid-pattern {
+      background-size: 24px 24px;
+      background-image: radial-gradient(circle, rgba(128, 128, 128, 0.16) 1px, transparent 1px);
+    }
+
+    /* ចលនាពណ៌រត់លើរបារសុពលភាពគណនី */
+    @keyframes flowingGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .validity-flow-bar {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899, #06b6d4, #10b981, #4f46e5);
+      background-size: 300% 100%;
+      animation: flowingGradient 4.5s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
+    }
+
+    /* ចលនាពណ៌ភ្លើងលោតចុះឡើងលើម្ជុលព្រួញ និងនាឡិកាវាស់ល្បឿន */
+    @keyframes flameBounceGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.45)) drop-shadow(0 0 8px rgba(251, 146, 60, 0.25));
+        opacity: 0.88;
+      }
+      50% {
+        filter: drop-shadow(0 0 12px rgba(249, 115, 22, 1)) drop-shadow(0 0 22px rgba(250, 204, 21, 0.7));
+        opacity: 1;
+      }
+    }
+
+    @keyframes needleBob {
+      0%, 100% {
+        transform: translate(0px, 0px);
+      }
+      50% {
+        transform: translate(2px, -3px);
+      }
+    }
+
+    .flame-glow-pulse {
+      animation: flameBounceGlow 1.5s ease-in-out infinite;
+    }
+
+    .needle-bob-anim {
+      animation: flameBounceGlow 1.5s ease-in-out infinite;
+    }
+
+    .play-ring-glow {
+      animation: flameBounceGlow 2s ease-in-out infinite;
+    }
+
+    /* រចនាបថកម្រងពណ៌ខៀវភ្លឺដូចរូបភាពគំរូ */
+    .cyan-arc-glow {
+      filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.55)) drop-shadow(0 0 16px rgba(14, 165, 233, 0.35));
+    }
+  </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen pb-24 transition-colors duration-300 relative overflow-x-hidden">
+<body class="bg-zinc-100 dark:bg-black text-zinc-900 dark:text-zinc-100 bg-grid-pattern min-h-screen flex items-center justify-center p-4 pb-28">
 
-    <!-- Ambient Background Glow -->
-    <div id="ambientGlow" class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full bg-red-500/15 dark:bg-red-500/20 blur-[90px] pointer-events-none transition-colors duration-500"></div>
+  <main class="w-full max-w-md rounded-3xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.85)] p-6 sm:p-7 space-y-5 transition-colors duration-300">
 
-    <!-- Main Container -->
-    <div class="max-w-md mx-auto px-4 pt-5 relative z-10">
+    <!-- ផ្នែកក្បាល (Header) -->
+    <header class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
+      <div class="flex items-center gap-3">
+        <!-- រូបសញ្ញាខ្លាភ្លើង (Flaming Tiger SVG) -->
+        <div class="w-11 h-11 rounded-2xl bg-black border border-orange-500/40 flex items-center justify-center overflow-hidden shadow-md shrink-0">
+          <svg viewBox="0 0 120 120" class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flaming Tiger Logo">
+            <defs>
+              <linearGradient id="tigerFlameGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ea580c" />
+                <stop offset="50%" stop-color="#f97316" />
+                <stop offset="100%" stop-color="#fde047" />
+              </linearGradient>
+              <linearGradient id="tigerFurGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fb923c" />
+                <stop offset="65%" stop-color="#ea580c" />
+                <stop offset="100%" stop-color="#9a3412" />
+              </linearGradient>
+            </defs>
 
-        <!-- Top Navigation Header -->
-        <header class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                    <i data-lucide="user" class="w-5 h-5"></i>
-                </div>
-                <div>
-                    <button onclick="openNameModal()" class="flex items-center gap-1.5 text-left group" title="ចុចដើម្បីប្តូរឈ្មោះ">
-                        <h1 id="visitorNameDisplay" class="text-base font-bold leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">សួស្តី, ភ្ញៀវកិត្តិយស</h1>
-                        <i data-lucide="pencil" class="w-3 h-3 text-slate-400 group-hover:text-indigo-500"></i>
-                    </button>
-                    <div class="flex items-center gap-1.5 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                        <span>ប្រព័ន្ធដំណើរការល្អ (99.9%)</span>
-                    </div>
-                </div>
-            </div>
+            <!-- អណ្តាតភ្លើងខាងក្រោយក្បាលខ្លា -->
+            <path d="M52 30 C48 16, 62 8, 70 14 C66 20, 74 22, 82 14 C86 22, 80 30, 72 34 Z" fill="url(#tigerFlameGrad)" />
+            <path d="M76 34 C88 22, 104 20, 112 24 C102 30, 104 36, 114 38 C102 44, 90 42, 82 40 Z" fill="url(#tigerFlameGrad)" />
 
-            <div class="flex items-center gap-2">
-                <!-- QR Modal Button -->
-                <button onclick="openQrModal()" class="w-10 h-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 shadow-sm active:scale-95 transition" title="បង្ហាញ QR Code">
-                    <i data-lucide="qr-code" class="w-4 h-4"></i>
-                </button>
-                <!-- Theme Toggle -->
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 shadow-sm active:scale-95 transition" title="ប្តូរពណ៌ផ្ទៃ">
-                    <i data-lucide="moon" id="themeIcon" class="w-4 h-4"></i>
-                </button>
-            </div>
-        </header>
+            <!-- ត្រចៀកខ្លា -->
+            <path d="M36 44 L26 28 L46 36 Z" fill="url(#tigerFurGrad)" stroke="#18181b" stroke-width="2" stroke-linejoin="round" />
+            <path d="M74 36 L90 26 L84 44 Z" fill="url(#tigerFurGrad)" stroke="#18181b" stroke-width="2" stroke-linejoin="round" />
 
-        <!-- Account Summary Banner (Bento Top) -->
-        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 dark:from-indigo-950 dark:via-slate-900 dark:to-slate-950 text-white rounded-3xl p-5 shadow-xl mb-5 border border-slate-700/50 relative overflow-hidden">
-            <div class="absolute right-[-20px] top-[-20px] opacity-10">
-                <i data-lucide="globe" class="w-36 h-36"></i>
-            </div>
-            
-            <div class="flex items-center justify-between mb-4 relative z-10">
-                <span class="px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold tracking-wide backdrop-blur-md border border-white/10">
-                    គម្រោង VIP UNLIMITED
-                </span>
-                <span class="text-xs text-slate-300 flex items-center gap-1">
-                    <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i>
-                    នៅសល់ ២៨ ថ្ងៃ
-                </span>
-            </div>
+            <!-- ក្បាលខ្លា -->
+            <path d="M32 52 C32 36, 52 28, 74 34 C88 38, 94 50, 88 66 C84 76, 74 86, 58 88 C42 90, 30 76, 32 52 Z" fill="url(#tigerFurGrad)" stroke="#18181b" stroke-width="2.5" />
 
-            <div class="grid grid-cols-2 gap-4 relative z-10">
-                <div>
-                    <p class="text-[11px] text-slate-400 mb-0.5">ទិន្នន័យប្រើប្រាស់</p>
-                    <p class="text-lg font-bold">45.8 GB <span class="text-xs font-normal text-slate-400">/ ∞</span></p>
-                </div>
-                <div>
-                    <p class="text-[11px] text-slate-400 mb-0.5">ល្បឿនតភ្ជាប់</p>
-                    <p class="text-lg font-bold text-emerald-400">10 Gbps <span class="text-xs font-normal text-slate-400">VIP</span></p>
-                </div>
-            </div>
+            <!-- ស្នាមឆ្នូតលើក្បាលខ្លា -->
+            <path d="M46 35 L50 47 L54 35" fill="#18181b" />
+            <path d="M58 33 L61 46 L65 34" fill="#18181b" />
+            <path d="M70 35 L71 46 L75 37" fill="#18181b" />
+            <path d="M33 56 L44 58 L34 63" fill="#18181b" />
+
+            <!-- ភ្នែកខ្លាពណ៌លឿងឆេះ -->
+            <ellipse cx="66" cy="52" rx="7" ry="4.5" transform="rotate(-12 66 52)" fill="#fef08a" stroke="#18181b" stroke-width="1.8" />
+            <circle cx="67" cy="52" r="2.2" fill="#18181b" />
+
+            <!-- ច្រមុះ និងមាត់គ្រហឹម -->
+            <path d="M40 60 C45 57, 52 59, 53 64 C50 67, 43 66, 40 60 Z" fill="#be123c" stroke="#18181b" stroke-width="1.8" />
+            <path d="M42 66 C50 68, 66 68, 76 74 L68 88 C56 92, 42 86, 38 74 Z" fill="#450a0a" stroke="#18181b" stroke-width="2.2" />
+
+            <!-- ចង្កូមខ្លា -->
+            <path d="M45 67 L48 77 L52 67 Z" fill="#fefce8" stroke="#18181b" stroke-width="1.5" />
+            <path d="M49 85 L52 76 L55 86 Z" fill="#fefce8" stroke="#18181b" stroke-width="1.5" />
+            <path d="M67 74 L65 83 L71 77 Z" fill="#fefce8" stroke="#18181b" stroke-width="1.5" />
+
+            <!-- អណ្តាតភ្លើងបាញ់ចេញពីមាត់ខ្លា -->
+            <path d="M46 72 C32 74, 18 84, 8 94 C20 92, 26 94, 18 102 C34 96, 46 88, 62 78 C78 68, 96 54, 112 42 C98 46, 94 52, 104 56 C86 64, 68 72, 46 72 Z" fill="url(#tigerFlameGrad)" />
+            <path d="M48 73 C36 77, 26 84, 18 90 C32 86, 46 79, 64 71 C78 64, 90 56, 98 50 C82 58, 64 67, 48 73 Z" fill="#fef9c3" opacity="0.9" />
+
+            <!-- ផ្កាភ្លើងតូចៗ -->
+            <circle cx="14" cy="78" r="2" fill="#facc15" />
+            <circle cx="104" cy="68" r="2.2" fill="#fb923c" />
+            <circle cx="94" cy="20" r="1.8" fill="#fde047" />
+          </svg>
         </div>
 
-        <!-- Step 1: Network Carrier Selector -->
-        <div class="mb-5">
-            <div class="flex items-center justify-between mb-2.5 px-1">
-                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">១. ជ្រើសរើសប្រព័ន្ធទូរស័ព្ទ</span>
-                <span id="pingIndicator" class="text-[11px] font-semibold text-red-500 flex items-center gap-1">
-                    <i data-lucide="activity" class="w-3 h-3"></i> 24ms
-                </span>
-            </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-base sm:text-lg tracking-tight">TheBest VIP</h1>
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-black">
+              PRO
+            </span>
+          </div>
+          <p id="systemHealthText" class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">ប្រព័ន្ធដំណើរការល្អ 99.8%</p>
+        </div>
+      </div>
 
-            <div class="grid grid-cols-3 gap-2.5">
-                <!-- Metfone Card -->
-                <button onclick="switchNetwork('metfone')" id="net-metfone" class="net-card group relative p-3.5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-red-500 shadow-md shadow-red-500/10 flex flex-col items-center gap-2 transition-all active:scale-95">
-                    <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-600 flex items-center justify-center font-extrabold text-sm">
-                        M
-                    </div>
-                    <span class="text-xs font-bold text-slate-900 dark:text-white">Metfone</span>
-                    <span class="check-badge absolute top-2 right-2 w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center">
-                        <i data-lucide="check" class="w-2.5 h-2.5"></i>
-                    </span>
-                </button>
+      <!-- ប៊ូតុងប្តូរភាសា និងផ្ទៃពណ៌ -->
+      <div class="flex items-center gap-2">
+        <button id="langToggle" type="button" aria-label="Toggle Language" class="px-3 py-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-xs font-bold transition cursor-pointer">
+          <span id="langLabel">EN</span>
+        </button>
 
-                <!-- Cellcard Card -->
-                <button onclick="switchNetwork('cellcard')" id="net-cellcard" class="net-card group relative p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-400 flex flex-col items-center gap-2 transition-all active:scale-95">
-                    <div class="w-10 h-10 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center font-extrabold text-sm">
-                        C
-                    </div>
-                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Cellcard</span>
-                    <span class="check-badge hidden absolute top-2 right-2 w-4 h-4 rounded-full bg-orange-500 text-white flex items-center justify-center">
-                        <i data-lucide="check" class="w-2.5 h-2.5"></i>
-                    </span>
-                </button>
+        <button id="themeToggle" type="button" aria-label="Toggle Theme" class="px-3 py-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <span id="themeIcon">☀️</span>
+          <span id="themeLabel">ស</span>
+        </button>
+      </div>
+    </header>
 
-                <!-- Smart Card -->
-                <button onclick="switchNetwork('smart')" id="net-smart" class="net-card group relative p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-400 flex flex-col items-center gap-2 transition-all active:scale-95">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-extrabold text-sm">
-                        S
-                    </div>
-                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Smart</span>
-                    <span class="check-badge hidden absolute top-2 right-2 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center">
-                        <i data-lucide="check" class="w-2.5 h-2.5"></i>
-                    </span>
-                </button>
-            </div>
+    <!-- ផ្ទាំងទី ១៖ ផ្ទះ (Home Tab) -->
+    <div id="tab-home" class="tab-panel space-y-5">
+      <!-- ម៉ោង ថ្ងៃបច្ចុប្បន្ន និង បណ្តាញ / IP -->
+      <section class="grid grid-cols-2 gap-3">
+        <div class="rounded-2xl p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800">
+          <p id="dateTimeLabel" class="text-[11px] font-medium text-zinc-500 dark:text-zinc-400">ថ្ងៃខែ និង ម៉ោង</p>
+          <p id="currentTime" class="text-lg font-extrabold tabular-nums mt-0.5">--:--:--</p>
+          <p id="currentDate" class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">--/--/----</p>
         </div>
 
-        <!-- Step 2: One-Click Import Card -->
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm mb-5">
-            <div class="flex items-center justify-between mb-3">
-                <div>
-                    <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">២. បញ្ចូលទៅក្នុងកម្មវិធី</span>
-                    <h2 id="selectedTitle" class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">
-                        ការកំណត់សម្រាប់ Metfone
-                    </h2>
-                </div>
-                <!-- Device Limit Badge -->
-                <div id="deviceBadge" class="px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 text-xs font-bold">
-                    ឧបករណ៍៖ 1/2
-                </div>
-            </div>
+        <div class="rounded-2xl p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800">
+          <div class="flex items-center justify-between">
+            <p id="ipLabel" class="text-[11px] font-medium text-zinc-500 dark:text-zinc-400">បណ្តាញ / IP បច្ចុប្បន្ន</p>
+            <span class="relative flex h-2.5 w-2.5 items-center justify-center">
+              <span id="serverDotPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
+              <span id="serverDot" class="relative inline-flex rounded-full h-2 w-2 bg-zinc-400"></span>
+            </span>
+          </div>
+          <p id="ipAddress" class="text-sm font-extrabold truncate mt-1 tabular-nums">កំពុងពិនិត្យ...</p>
+          <p id="ipMeta" class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">តំបន់៖ --</p>
+        </div>
+      </section>
 
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-5">
-                ចុចលើកម្មវិធីដែលអ្នកបានដំឡើងខាងក្រោម ដើម្បីនាំចូល Server ដោយស្វ័យប្រវត្តិ (Auto-Update Subscription)។
-            </p>
+      <!-- សុពលភាពប្រើប្រាស់ -->
+      <section class="rounded-2xl p-4 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span id="validityTitle" class="text-xs font-semibold text-zinc-600 dark:text-zinc-300">សុពលភាពគណនី</span>
+          <span id="expiryBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-black">
+            នៅសល់ -- ថ្ងៃ
+          </span>
+        </div>
+        <div class="flex items-baseline justify-between gap-2">
+          <p id="countdownText" class="text-sm sm:text-base font-extrabold tabular-nums">-- ថ្ងៃ -- ម៉ោង -- នាទី</p>
+          <p id="expiryDateLabel" class="text-[11px] text-zinc-500 dark:text-zinc-400 shrink-0">ផុតកំណត់៖ --</p>
+        </div>
+        <div class="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+          <div id="validityBar" class="validity-flow-bar h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+        </div>
+      </section>
 
-            <!-- Primary Import Buttons -->
-            <div class="space-y-2.5">
-                <!-- V2Box Button -->
-                <button onclick="launchImport('v2box')" class="w-full py-3.5 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm flex items-center justify-between shadow-lg shadow-indigo-600/20 active:scale-[0.98] transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold text-xs">
-                            V2
-                        </div>
-                        <div class="text-left">
-                            <div class="leading-none">នាំចូលទៅកាន់ V2Box</div>
-                            <div class="text-[10px] text-indigo-200 mt-1">បើក និងទាញយក Server ភ្លាមៗ</div>
-                        </div>
-                    </div>
-                    <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
-                </button>
-            </div>
+      <!-- បញ្ជី Server ទាំង ៣ -->
+      <section class="rounded-2xl p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 space-y-2.5">
+        <div class="flex items-center justify-between text-xs">
+          <span id="nodesTitle" class="font-semibold text-zinc-600 dark:text-zinc-300">កញ្ចប់ Server រួមបញ្ចូល (3 Nodes)</span>
+          <span id="lockedBadge" class="text-[11px] text-rose-500 font-semibold">🔒 Locked</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <!-- Metfone -->
+          <div class="relative py-2.5 px-1.5 rounded-xl bg-white dark:bg-zinc-950 border border-rose-500/45 hover:border-rose-500 transition flex flex-col items-center">
+            <div class="w-7 h-7 rounded-full bg-rose-500/15 text-rose-500 font-extrabold text-xs flex items-center justify-center mb-1">M</div>
+            <p id="node1Plan" class="text-[11px] font-bold truncate w-full">Free</p>
+            <p class="text-[10px] text-rose-500 font-semibold truncate w-full">Metfone</p>
+          </div>
 
-            <!-- Copy Link Divider -->
-            <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
-                <div class="truncate text-xs text-slate-400 font-mono bg-slate-100 dark:bg-slate-950 px-3 py-2 rounded-xl flex-1 select-all" id="maskedUrlText">
-                    https://vip-kh.net/sub/metfone-••••••
-                </div>
-                <button onclick="copySubscription()" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center gap-1.5 shrink-0 active:scale-95 transition">
-                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                    <span>ចម្លង Link</span>
-                </button>
+          <!-- Cellcard -->
+          <div class="relative py-2.5 px-1.5 rounded-xl bg-white dark:bg-zinc-950 border border-amber-500/50 hover:border-amber-500 transition flex flex-col items-center">
+            <div class="w-7 h-7 rounded-full bg-amber-500/15 text-amber-500 font-extrabold text-xs flex items-center justify-center mb-1">C</div>
+            <p id="node2Plan" class="text-[11px] font-bold truncate w-full">Free</p>
+            <p class="text-[10px] text-amber-500 font-semibold truncate w-full">Cellcard</p>
+          </div>
+
+          <!-- Smart -->
+          <div class="relative py-2.5 px-1.5 rounded-xl bg-white dark:bg-zinc-950 border border-emerald-500/50 hover:border-emerald-500 transition flex flex-col items-center">
+            <div class="w-7 h-7 rounded-full bg-emerald-500/15 text-emerald-500 font-extrabold text-xs flex items-center justify-center mb-1">S</div>
+            <p id="node3Plan" class="text-[11px] font-bold truncate w-full">Service (Social Pack)</p>
+            <p class="text-[10px] text-emerald-500 font-semibold truncate w-full">Smart</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ប៊ូតុង Import ចូល V2Box -->
+      <section class="pt-1 space-y-2.5">
+        <a id="importLink" href="#" class="w-full p-3.5 sm:px-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 hover:from-indigo-500 hover:to-violet-400 text-white active:scale-[0.99] flex items-center justify-between gap-3 shadow-[0_12px_28px_rgba(99,102,241,0.35)] transition cursor-pointer no-underline">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-sm text-white font-extrabold text-sm tracking-wide flex items-center justify-center shrink-0">
+              V2
             </div>
+            <div class="text-left min-w-0">
+              <p id="importMainTitle" class="font-extrabold text-sm sm:text-base leading-snug truncate">នាំចូលទៅកាន់ V2Box</p>
+              <p id="importSubTitle" class="text-[11px] sm:text-xs text-indigo-100/90 leading-snug truncate">បើក និងទាញយក Server ភ្លាមៗ</p>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
+          </svg>
+        </a>
+
+        <div class="grid grid-cols-2 gap-2">
+          <a id="importAltLink" href="#" class="py-2.5 px-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-xs font-semibold text-center transition cursor-pointer no-underline">
+            ⚡ <span id="altMethodText">វិធីទី ២ (Sub)</span>
+          </a>
+          <button id="copySubBtn" type="button" class="py-2.5 px-3 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-xs font-semibold transition cursor-pointer">
+            📋 <span id="copyBtnText">ចម្លង Link</span>
+          </button>
         </div>
 
-        <!-- Step 3: App Store / Play Store Downloads -->
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                    <i data-lucide="download-cloud" class="w-5 h-5"></i>
-                </div>
-                <div>
-                    <h3 class="text-xs font-bold text-slate-900 dark:text-white">មិនទាន់មានកម្មវិធីមែនទេ?</h3>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400">ទាញយក V2Box ដោយឥតគិតថ្លៃ</p>
-                </div>
-            </div>
-            <div class="flex gap-1.5">
-                <a href="https://apps.apple.com/app/v2box-v2ray-client/id6446814690" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[11px] font-bold hover:bg-slate-200 transition">iOS</a>
-                <a href="https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[11px] font-bold hover:bg-slate-200 transition">Android</a>
-            </div>
+        <p id="statusBox" class="text-center text-[11px] text-zinc-500 dark:text-zinc-400 min-h-[16px]">
+          ចុចប៊ូតុងខាងលើដើម្បីភ្ជាប់ដោយស្វ័យប្រវត្តិ
+        </p>
+      </section>
+
+      <!-- ប្រអប់ទាញយកកម្មវិធី V2Box -->
+      <section class="rounded-2xl p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-2.5">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-full bg-zinc-200/80 dark:bg-zinc-800 text-zinc-900 dark:text-white flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h2 id="noAppTitle" class="text-xs sm:text-sm font-bold truncate">មិនទាន់មានកម្មវិធីមែនទេ?</h2>
+            <p id="noAppDesc" class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">ទាញយក V2Box ដោយឥតគិតថ្លៃ</p>
+          </div>
         </div>
 
+        <div class="flex items-center gap-1.5 shrink-0">
+          <a id="iosDownloadLink" href="https://apps.apple.com/app/v2box-v2ray-client/id6446814690" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xs font-bold transition no-underline">
+            iOS
+          </a>
+          <a id="androidDownloadLink" href="https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xs font-bold transition no-underline">
+            Android
+          </a>
+        </div>
+      </section>
     </div>
 
-    <!-- QR Code Modal -->
-    <div id="qrModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-xs w-full border border-slate-200 dark:border-slate-800 shadow-2xl text-center transform transition-all">
-            <div class="flex items-center justify-between mb-4">
-                <span id="qrModalTitle" class="text-sm font-bold">QR Code • Metfone</span>
-                <button onclick="closeQrModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
+    <!-- ផ្ទាំងទី ២៖ ម៉ាស៊ីនបម្រើ (Servers Tab) -->
+    <div id="tab-servers" class="tab-panel hidden space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 id="serversTabTitle" class="text-sm font-bold">បញ្ជីម៉ាស៊ីនបម្រើ VIP (3 Nodes)</h2>
+        <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 font-bold">Online</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <!-- Metfone Server -->
+        <div class="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/80 border border-rose-500/40 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-500 font-extrabold flex items-center justify-center">M</div>
+            <div>
+              <p class="text-xs font-bold">Metfone VIP Free</p>
+              <p class="text-[11px] text-zinc-500 dark:text-zinc-400">ម៉ាស៊ីនមេ ពិសេស( Premium )</p>
             </div>
-            
-            <!-- Dynamic QR Code Image -->
-            <div class="bg-white p-4 rounded-2xl inline-block border border-slate-100 shadow-inner mb-4">
-                <img id="qrImage" src="" alt="Subscription QR Code" class="w-44 h-44 object-contain">
+          </div>
+          <span class="text-xs font-bold text-emerald-500">24 ms</span>
+        </div>
+
+        <!-- Cellcard Server -->
+        <div class="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/80 border border-amber-500/40 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 font-extrabold flex items-center justify-center">C</div>
+            <div>
+              <p class="text-xs font-bold">Cellcard VIP Free</p>
+              <p class="text-[11px] text-zinc-500 dark:text-zinc-400">ម៉ាស៊ីនមេ ពិសេស( Premium )</p>
             </div>
-
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-                បើកកម្មវិធី V2Box រួចចុចសញ្ញាបូក (+) -> Scan QR Code ដើម្បីភ្ជាប់ភ្លាមៗ។
-            </p>
-            <button onclick="closeQrModal()" class="w-full py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold">
-                បិទផ្ទាំងនេះ
-            </button>
+          </div>
+          <span class="text-xs font-bold text-emerald-500">28 ms</span>
         </div>
-    </div>
 
-    <!-- Edit Visitor Name Modal -->
-    <div id="nameModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-xs w-full border border-slate-200 dark:border-slate-800 shadow-2xl">
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-sm font-bold">កំណត់ឈ្មោះអ្នកប្រើប្រាស់</span>
-                <button onclick="closeNameModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
+        <!-- Smart Server -->
+        <div class="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/80 border border-emerald-500/40 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-500 font-extrabold flex items-center justify-center">S</div>
+            <div>
+              <p class="text-xs font-bold">Smart Service (Social Pack)</p>
+              <p class="text-[11px] text-zinc-500 dark:text-zinc-400">ម៉ាស៊ីនមេ ពិសេស( Premium )</p>
             </div>
-            <input type="text" id="visitorNameInput" placeholder="បញ្ចូលឈ្មោះរបស់អ្នក..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-indigo-500 mb-4">
-            <button onclick="saveVisitorName()" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">
-                រក្សាទុកឈ្មោះ
-            </button>
+          </div>
+          <span class="text-xs font-bold text-emerald-500">21 ms</span>
         </div>
-    </div>
+      </div>
 
-    <!-- Notification Toast -->
-    <div id="toastBox" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
-        <div class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2.5 rounded-2xl shadow-xl text-xs font-semibold flex items-center gap-2">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 dark:text-emerald-600"></i>
-            <span id="toastText">ជោគជ័យ</span>
+      <!-- មុខងារជ្រើសរើសតំបន់ម៉ាស៊ីនបម្រើ 🇸🇬 🇻🇳 🇰🇭 -->
+      <section class="rounded-2xl p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <p id="regionSelectorTitle" class="text-xs font-bold text-zinc-700 dark:text-zinc-200">ជ្រើសរើសតំបន់ម៉ាស៊ីនបម្រើ</p>
+          <button id="pingRegionsBtn" type="button" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-orange-500/15 hover:bg-orange-500/25 text-orange-500 transition cursor-pointer">
+            ⚡ <span id="pingRegionsLabel">វាស់ Ping</span>
+          </button>
         </div>
-    </div>
 
-    <input type="text" id="clipboardHelper" class="sr-only" aria-hidden="true">
-
-    <script>
-        lucide.createIcons();
-
-        // គ្រប់គ្រងឈ្មោះអ្នកចូលមើល (ទាញពី URL ?name=... ឬ localStorage)
-        function initVisitorName() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const paramName = urlParams.get('name') || urlParams.get('user');
-            const savedName = localStorage.getItem('vpn_visitor_name');
-            const finalName = paramName || savedName || 'ភ្ញៀវកិត្តិយស';
-
-            if (paramName) {
-                localStorage.setItem('vpn_visitor_name', paramName);
-            }
-            document.getElementById('visitorNameDisplay').textContent = `សួស្តី, ${finalName}`;
-        }
-
-        function openNameModal() {
-            const current = localStorage.getItem('vpn_visitor_name') || '';
-            document.getElementById('visitorNameInput').value = current;
-            const modal = document.getElementById('nameModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeNameModal() {
-            const modal = document.getElementById('nameModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function saveVisitorName() {
-            const newName = document.getElementById('visitorNameInput').value.trim();
-            if (newName) {
-                localStorage.setItem('vpn_visitor_name', newName);
-                document.getElementById('visitorNameDisplay').textContent = `សួស្តី, ${newName}`;
-                notify(`បានប្តូរឈ្មោះទៅជា "${newName}"`);
-            }
-            closeNameModal();
-        }
-
-        initVisitorName();
-
-        // ព័ត៌មាន Subscription តាមប្រតិបត្តិករ (ប្តូរ Link របស់អ្នកនៅទីនេះ)
-        const NETWORK_DATA = {
-            metfone: {
-                label: 'Metfone',
-                url: 'https://gist.githubusercontent.com/KhannChannvp/6155e85e7e3fe8246e7c1959ada2daac/raw/52b6acd9693bd807284225ef2975a513bac8e5be/gistfile1.txt',
-                masked: 'https://gist.githubusercontent.com/KhannChannvp/••••••',
-                devices: '1/2',
-                ping: '24ms',
-                colorClass: 'border-red-500 shadow-md shadow-red-500/10',
-                glowClass: 'bg-red-500/15 dark:bg-red-500/20',
-                pingColor: 'text-red-500'
-            },
-            cellcard: {
-                label: 'Cellcard',
-                url: 'https://gist.githubusercontent.com/KhannChannvp/6155e85e7e3fe8246e7c1959ada2daac/raw/52b6acd9693bd807284225ef2975a513bac8e5be/gistfile1.txt',
-                masked: 'https://gist.githubusercontent.com/KhannChannvp/••••••',
-                devices: '0/2',
-                ping: '19ms',
-                colorClass: 'border-orange-500 shadow-md shadow-orange-500/10',
-                glowClass: 'bg-orange-500/15 dark:bg-orange-500/20',
-                pingColor: 'text-orange-500'
-            },
-            smart: {
-                label: 'Smart',
-                url: 'https://gist.githubusercontent.com/KhannChannvp/6155e85e7e3fe8246e7c1959ada2daac/raw/52b6acd9693bd807284225ef2975a513bac8e5be/gistfile1.txt',
-                masked: 'https://gist.githubusercontent.com/KhannChannvp/••••••',
-                devices: '2/2',
-                ping: '21ms',
-                colorClass: 'border-emerald-500 shadow-md shadow-emerald-500/10',
-                glowClass: 'bg-emerald-500/15 dark:bg-emerald-500/20',
-                pingColor: 'text-emerald-500'
-            }
-        };
-
-        let activeNetwork = 'metfone';
-
-        function switchNetwork(netKey) {
-            activeNetwork = netKey;
-            const info = NETWORK_DATA[netKey];
-
-            // Reset all network cards
-            document.querySelectorAll('.net-card').forEach(card => {
-                card.className = 'net-card group relative p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col items-center gap-2 transition-all active:scale-95';
-                card.querySelector('.check-badge').classList.add('hidden');
-            });
-
-            // Highlight selected network card
-            const selectedCard = document.getElementById(`net-${netKey}`);
-            selectedCard.className = `net-card group relative p-3.5 rounded-2xl bg-white dark:bg-slate-900 border-2 ${info.colorClass} flex flex-col items-center gap-2 transition-all active:scale-95`;
-            selectedCard.querySelector('.check-badge').classList.remove('hidden');
-
-            // Update Ambient Glow & Texts
-            document.getElementById('ambientGlow').className = `fixed top-[-10%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full ${info.glowClass} blur-[90px] pointer-events-none transition-colors duration-500`;
-            document.getElementById('selectedTitle').textContent = `ការកំណត់សម្រាប់ ${info.label}`;
-            document.getElementById('maskedUrlText').textContent = info.masked;
-            document.getElementById('deviceBadge').textContent = `ឧបករណ៍៖ ${info.devices}`;
-
-            const pingEl = document.getElementById('pingIndicator');
-            pingEl.className = `text-[11px] font-semibold ${info.pingColor} flex items-center gap-1`;
-            pingEl.innerHTML = `<i data-lucide="activity" class="w-3 h-3"></i> ${info.ping}`;
-            lucide.createIcons();
-        }
-
-        function launchImport(app) {
-            const info = NETWORK_DATA[activeNetwork];
-            const encodedUrl = encodeURIComponent(info.url);
-            const subName = encodeURIComponent(`VIP ${info.label}`);
-
-            if (app === 'v2box') {
-                notify(`កំពុងបើក V2Box សម្រាប់ ${info.label}...`);
-                window.location.href = `v2box://install-sub?url=${encodedUrl}&name=${subName}`;
-            }
-        }
-
-        function copySubscription() {
-            const info = NETWORK_DATA[activeNetwork];
-            const helper = document.getElementById('clipboardHelper');
-            helper.value = info.url;
-            helper.select();
-            helper.setSelectionRange(0, 99999);
-            try {
-                document.execCommand('copy');
-                notify(`បានចម្លង Link របស់ ${info.label} រួចរាល់!`);
-            } catch (e) {
-                notify('មិនអាចចម្លងបានទេ');
-            }
-        }
-
-        function openQrModal() {
-            const info = NETWORK_DATA[activeNetwork];
-            document.getElementById('qrModalTitle').textContent = `QR Code • ${info.label}`;
-            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(info.url)}`;
-            const modal = document.getElementById('qrModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeQrModal() {
-            const modal = document.getElementById('qrModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            document.getElementById('themeIcon').setAttribute('data-lucide', isDark ? 'sun' : 'moon');
-            lucide.createIcons();
-        }
-
-        let toastTimer;
-        function notify(msg) {
-            const box = document.getElementById('toastBox');
-            document.getElementById('toastText').textContent = msg;
-            box.classList.remove('opacity-0', 'translate-y-4');
-            box.classList.add('opacity-100', 'translate-y-0');
-
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                box.classList.add('opacity-0', 'translate-y-4');
-                box.classList.remove('opacity-100', 'translate-y-0');
-            }, 2500);
-        }
-    </script>
-</body>
-</html>
+        <div class="grid grid-cols-3 gap-2">
+          <!-- ស
